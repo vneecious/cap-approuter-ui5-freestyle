@@ -1,14 +1,14 @@
 _schema-version: 3.3.0
-ID: mysample
+ID: sample
 description: A simple CAP project.
 version: 1.0.0
 modules:
-- name: mysample-srv
+- name: sample-srv
   type: nodejs
   path: gen/srv
   requires:
-  - name: mysample-auth
-  - name: mysample-destination
+  - name: sample-auth
+  - name: sample-destination
   provides:
   - name: srv-api
     properties:
@@ -19,7 +19,7 @@ modules:
     readiness-health-check-type: http
   build-parameters:
     builder: npm
-- name: mysample
+- name: sample
   type: approuter.nodejs
   path: app/router
   requires:
@@ -29,18 +29,18 @@ modules:
       forwardAuthToken: true
       name: srv-api
       url: ~{srv-url}
-  - name: mysample-auth
-  - name: mysample-destination
-  - name: mysample-html5-runtime
+  - name: sample-auth
+  - name: sample-destination
+  - name: sample-html5-runtime
   parameters:
     disk-quota: 256M
     keep-existing-routes: true
     memory: 256M
-- name: mysample-app-deployer
+- name: sample-app-deployer
   type: com.sap.application.content
   path: gen
   requires:
-  - name: mysample-html5-repo-host
+  - name: sample-html5-repo-host
     parameters:
       content-target: true
   build-parameters:
@@ -61,16 +61,16 @@ modules:
     - npm run build:cf
     supported-platforms: []
 resources:
-- name: mysample-auth
+- name: sample-auth
   type: org.cloudfoundry.managed-service
   parameters:
     config:
       tenant-mode: dedicated
-      xsappname: mysample-${org}-${space}
+      xsappname: sample-${org}-${space}
     path: ./xs-security.json
     service: xsuaa
     service-plan: application
-- name: mysample-destination
+- name: sample-destination
   type: org.cloudfoundry.managed-service
   parameters:
     config:
@@ -81,7 +81,7 @@ resources:
           - Authentication: NoAuthentication
             HTML5.DynamicDestination: true
             HTML5.ForwardAuthToken: true
-            Name: mysample-srv-api
+            Name: sample-srv-api
             ProxyType: Internet
             Type: HTTP
             URL: ~{srv-api/srv-url}
@@ -93,12 +93,12 @@ resources:
           existing_destinations_policy: update
     service: destination
     service-plan: lite
-- name: mysample-html5-repo-host
+- name: sample-html5-repo-host
   type: org.cloudfoundry.managed-service
   parameters:
     service: html5-apps-repo
     service-plan: app-host
-- name: mysample-html5-runtime
+- name: sample-html5-runtime
   type: org.cloudfoundry.managed-service
   parameters:
     service: html5-apps-repo
