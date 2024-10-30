@@ -1,0 +1,17 @@
+<mvc:View
+    controllerName="mysampleui.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <List items="{/Books}">
+            <items>
+                <StandardListItem title="{title}" />
+            </items>
+        </List>
+    </Page>
+</mvc:View>
