@@ -22,7 +22,7 @@
     "watch-mysampleui": "cds watch --open mysampleui/webapp/index.html?sap-ui-xx-viewCache=false",
     "start-approuter": "cd app/router && npm start",
     "dev-approuter": "npm run watch-mysampleui & npm run start-approuter",
-    "undeploy": "cf undeploy sample --delete-services --delete-service-keys --delete-service-brokers",
+    "undeploy": "cf undeploy mysample --delete-services --delete-service-keys --delete-service-brokers",
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
     "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
   },
